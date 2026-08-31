@@ -73,10 +73,10 @@ st.markdown("---")
 st.markdown("### 📄 CLIENT INCIDENT FORENSIC REPORT EXPORT")
 if st.button("Generate Professional Security Audit Report"):
     
-    # Read logs for table inclusion
+    # Read logs for table inclusion safely
     log_rows = ""
     if os.path.exists(log_file):
-        with open(log_file, "r") as lf:
+        with open(log_file, "r", encoding="utf-8") as lf:
             lines = lf.readlines()
         for line in lines[-20:]:
             log_rows += f"<tr><td style='border:1px solid #0f0; padding:8px;'>{line.strip()}</td></tr>"
@@ -93,7 +93,6 @@ if st.button("Generate Professional Security Audit Report"):
             table {{ width: 100%; border-collapse: collapse; margin-top: 20px; }}
             th, td {{ border: 1px solid #00ff00; padding: 10px; text-align: left; }}
             th {{ background-color: #112211; }}
-            .badge {{ background-color: #ff0000; color: #fff; padding: 3px 8px; font-weight: bold; }}
             .safe {{ background-color: #00ff00; color: #000; padding: 3px 8px; font-weight: bold; }}
         </style>
     </head>
@@ -126,9 +125,6 @@ if st.button("Generate Professional Security Audit Report"):
     """
     
     report_filename = "Cyber_Shield_Forensic_Audit_Report.html"
-    with open(report_filename, "r+ if os.path.exists(report_filename) else 'w'", encoding="utf-8") as rep:
-        # Just writing fresh content cleanly
-        pass
     with open(report_filename, "w", encoding="utf-8") as rep:
         rep.write(professional_report)
     
